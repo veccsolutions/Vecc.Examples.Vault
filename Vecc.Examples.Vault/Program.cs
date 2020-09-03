@@ -18,6 +18,16 @@ namespace Vecc.Examples.Vault
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration(configurationBuilder =>
+                {
+                    var builtConfig = configurationBuilder.Build();
+                    var keyVaultConfig = builtConfig.GetSection("KeyVault");
+                    var vault = keyVaultConfig["vault"];
+                    var clientId = keyVaultConfig["clientId"];
+                    var clientSecret = keyVaultConfig["secret"];
+
+                    configurationBuilder.AddAzureKeyVault(vault, clientId, clientSecret);
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
