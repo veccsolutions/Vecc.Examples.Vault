@@ -25,6 +25,7 @@ namespace Vecc.Examples.Vault
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.Configure<TestOptions>(this.Configuration.GetSection(typeof(TestOptions).FullName));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
