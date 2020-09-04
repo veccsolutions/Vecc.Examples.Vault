@@ -26,7 +26,7 @@ namespace Vecc.Examples.Vault
                     var clientId = keyVaultConfig["clientId"];
                     var clientSecret = keyVaultConfig["secret"];
 
-                    configurationBuilder.AddAzureKeyVault(vault, clientId, clientSecret);
+                    configurationBuilder.AddAzureKeyVault(vault, clientId, clientSecret, new DottableKeyVaultSecretManager());
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
