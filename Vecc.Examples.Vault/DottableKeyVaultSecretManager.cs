@@ -1,14 +1,14 @@
-﻿using Microsoft.Azure.KeyVault.Models;
+﻿using Azure.Extensions.AspNetCore.Configuration.Secrets;
+using Azure.Security.KeyVault.Secrets;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.AzureKeyVault;
 
 namespace Vecc.Examples.Vault
 {
-    public class DottableKeyVaultSecretManager : DefaultKeyVaultSecretManager
+    public class DottableKeyVaultSecretManager : KeyVaultSecretManager
     {
-        public override string GetKey(SecretBundle secret)
+        public override string GetKey(KeyVaultSecret secret)
         {
-            var result = secret.SecretIdentifier.Name.Replace("---", ".").Replace("--", ConfigurationPath.KeyDelimiter);
+            var result = secret.Name.Replace("---", ".").Replace("--", ConfigurationPath.KeyDelimiter);
 
             return result;
         }
